@@ -498,9 +498,34 @@ def now():
     print('2019年7月23日09:46:40')
 
 f=now
-f()
+def test(func):
+    return func()
+test(f)                 #test函数是一个传入函数，然后再返回传入函数的函数，Python特性之一
 
 
+
+import logging
+
+def use_logging(func):
+
+    def wrapper():
+        logging.warn("%s is running" % func.__name__)
+        return func()   # 把 foo 当做参数传递进来时，执行func()就相当于执行foo()
+    return wrapper
+
+def foo():
+    print('i am foo')
+
+foo = use_logging(foo)  # 因为装饰器 use_logging(foo) 返回的是函数对象 wrapper，这条语句相当于  foo = wrapper
+foo()
+
+"""
+装饰器总结
+装饰器是在不改动原函数代码框架的条件下，增加函数功能的一种方法。
+在上面的例子中，函数use_logging，传入参数函数foo(),在内部继续定义函数wrapper()，函数wrapper
+的功能是打印日志并返回传入函数foo()，而use_logging最终返回的是wrapper函数，通过这种嵌套达到调用原函
+数foo()并新增打印日志功能。
+"""
 
 
 
