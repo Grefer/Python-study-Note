@@ -556,7 +556,21 @@ elif s != 7986:
 
 
 
+"""偏函数"""
 
+import functools
+int2 = functools.partial(int,base=2)
+
+int2('100000')
+
+kw={'base':2}
+int('100000',**kw)
+
+max2 = functools.partial(max,10)          
+max2(5,6,7)
+"""这里相当于把10加入可变参数*args，也就是自动在传入的参数中加上10，因此最终结果=10"""
+args = (10,5,6,7)
+max(*args)
 
 
 
