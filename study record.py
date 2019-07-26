@@ -582,6 +582,37 @@ max(*args)
 函数的默认关键字。
 """
 
+"""模组Module"""
+
+import sys
+
+def test():   
+    args = sys.argv
+    if len(args)==1:
+        print('Hello,world!')
+    elif len(args)==2:
+        print('Hello,%s!' % args[1])
+    else:
+        print('Too many arguments!')
+
+if __name__ == '__main__':
+    test()
+
+
+"""作用域"""
+
+def _private_1(name):
+    return 'Hello, %s' % name      #private
+
+def _private_2(name):
+    return 'Hi, %s' % name         #private
+
+def greeting(name):                #public
+    if len(name) > 3:
+        return _private_1(name)
+    else:
+        return _private_2(name)
+
 
 
 
