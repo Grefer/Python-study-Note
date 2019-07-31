@@ -616,12 +616,27 @@ def greeting(name):                #public
 
 
 
+"""面向过程与面向对象"""
+#    Process Oriented Programming(POP)
+std1={'name':'Bob','score':98}
+std2={'name':'Tom','score':95}
 
+def print_score(std):
+    print('%s,%s' %(std['name'],std['score']))
 
+#    Object Oriented Programming(OOP)
+class student(object):
+    def __init__(self,name,score):
+        self.name = name
+        self.score = score
+    def print_score(self):
+        print('%s:%s' %(self.name,self.score))
 
+Mary = student('Mary',60)
+Jerry = student('Jerry',75)
 
-
-
+Mary.print_score()
+Jerry.print_score()
 
 
 
