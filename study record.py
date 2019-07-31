@@ -681,15 +681,20 @@ class Student(object):
     def get_gender(self):
         return self._gender
     def set_name(self,name):
-        self._name = name
+        if type(name)==str:
+            self._name = name
+        else:
+            raise ValueError('bad name')
     def set_score(self,score):
         if 0<=score<=100:
             self._score=score
         else:
             raise ValueError('bad score')
     def set_gender(self,gender):
-        self._gender = gender
-
+        if gender == 'male' or 'famale':
+            self._gender = gender
+        else:
+            raise ValueError('bad gender')
 # 测试:
 bart = Student('Bart',98,'male')
 if bart.get_gender() != 'male':
