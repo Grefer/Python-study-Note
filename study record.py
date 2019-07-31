@@ -625,18 +625,85 @@ def print_score(std):
     print('%s,%s' %(std['name'],std['score']))
 
 #    Object Oriented Programming(OOP)
-class student(object):
-    def __init__(self,name,score):
+class Student(object):
+    def __init__(self,name,score):   #定义类属性的特殊方法“__init__”前后分别有两个下划线！！！
         self.name = name
         self.score = score
-    def print_score(self):
+    def print_score(self):           #类内部定义函数实现数据封装
         print('%s:%s' %(self.name,self.score))
+    def get_grade(self):
+        if self.score >=90:
+            return 'A'
+        elif self.score >=80:
+            return 'B'
+        elif self.score >=60:
+            return 'C'
+        else:
+            return 'D'
+            
 
-Mary = student('Mary',60)
-Jerry = student('Jerry',75)
+Mary = Student('Mary',60)
+Jerry = Student('Jerry',75)
 
 Mary.print_score()
 Jerry.print_score()
+print(Mary.name,Mary.get_grade())
+print(Jerry.name,Jerry.get_grade())
+
+"""
+和普通的函数相比，在类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，
+不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、
+关键字参数和命名关键字参数。
+"""
+
+# 访问限制
+
+class Student(object):
+    def __init__(self,name,score,gender):   #定义类属性的特殊方法“__init__”前后分别有两个下划线！！！
+        self._name = name
+        self._score = score
+        self._gender = gender
+    def print_score(self):           #类内部定义函数实现数据封装
+        print('%s:%s:%s' %(self._name,self._score,self._gender))
+    def get_grade(self):
+        if self._score >=90:
+            return 'A'
+        elif self._score >=80:
+            return 'B'
+        elif self._score >=60:
+            return 'C'
+        else:
+            return 'D'
+    def get_name(self):
+        return self._name
+    def get_score(self):
+        return self._score
+    def get_gender(self):
+        return self._gender
+    def set_name(self,name):
+        self._name = name
+    def set_score(self,score):
+        if 0<=score<=100:
+            self._score=score
+        else:
+            raise ValueError('bad score')
+    def set_gender(self,gender):
+        self._gender = gender
+
+# 测试:
+bart = Student('Bart',98,'male')
+if bart.get_gender() != 'male':
+    print('测试失败!')
+else:
+    bart.set_gender('female')
+    if bart.get_gender() != 'female':
+        print('测试失败!')
+    else:
+        print('测试成功!')
+
+
+Mary=Student('Mary',99,'female')
+Mary.name
 
 
 
