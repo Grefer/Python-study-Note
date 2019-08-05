@@ -706,12 +706,46 @@ else:
     else:
         print('测试成功!')
 
-
 Mary=Student('Mary',99,'female')
 Mary.name
 
+'''继承与多态'''
 
+class Animal(object):
+    def run(self):
+        print('Animal is running...')
+    
+class Dog(Animal):
+    def run(self):
+        print('Dog is running...')
+class Cat(Animal):
+    def run(self):
+        print('Cat is running...')
 
+dog=Dog()
+dog.run()
+cat=Cat()
+cat.run()
 
+#判断数据类型
+a=list()
+b=Animal()
+c=Dog()
+isinstance(a,list)
+isinstance(b,Animal)
+isinstance(c,Dog)
+isinstance(c,Animal)
 
+def run_twice(animal):
+    animal.run()
+    animal.run()
 
+run_twice(Animal())
+run_twice(Dog())
+run_twice(Cat())
+
+class Tortoise(Animal):
+    def run(self):
+        print('Tortoise is running slowly...')
+
+run_twice(Tortoise())
