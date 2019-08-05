@@ -749,3 +749,21 @@ class Tortoise(Animal):
         print('Tortoise is running slowly...')
 
 run_twice(Tortoise())
+
+
+'''获取对象信息'''
+type(123)
+type('str')
+
+import types
+def fn():
+    pass
+type(fn)==types.FunctionType
+type(abs)==types.BuiltinFunctionType
+type(lambda x:x)==types.LambdaType
+type(x for x in range(10))==types.GeneratorType
+
+isinstance([1,2,3],(list,tuple))
+
+len('ABC')
+'ABC'.__len__()
