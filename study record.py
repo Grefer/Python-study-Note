@@ -767,3 +767,24 @@ isinstance([1,2,3],(list,tuple))
 
 len('ABC')
 'ABC'.__len__()
+
+
+'''实例属性和类属性'''
+class Student(object):
+    def __init__(self,name):
+        self.name=name
+        
+s=Student('bob')
+s.score=90            #实例绑定属性
+
+class Student(object):
+    name='Student'    #类本身绑定属性
+
+s=Student()
+print(s.name)
+print(Student.name)
+s.name='Cony'
+print(s.name)         #实例属性优先级高于类属性
+print(Student.name)
+del s.name
+print(s.name)
