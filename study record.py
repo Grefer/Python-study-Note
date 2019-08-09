@@ -810,3 +810,49 @@ else:
         else:
             print('Students:', Student.count)
             print('测试通过!')
+
+
+'''使用__slots__'''
+class Student(object):
+    pass
+
+s=Student()
+s.name='Tom'
+print(s.name)
+
+def set_age(self,age):              #定义一个函数作为实例方法
+    self.age=age
+    
+from types import MethodType
+s.set_age=MethodType(set_age,s)     #给实例绑定一个方法
+s.set_age(25)                       #调用实例方法
+s.age
+
+s2=Student()
+s2.set_age(25)
+s2.age                              #实例方法不通用
+
+def set_score(self,score):
+    self.score=score
+Student.set_score=set_score         #给类绑定方法
+
+s.set_score(100)
+s.score                             #对每个实例都有效
+s2.set_score(98)
+s2.score                            #对每个实例都有效
+
+class Student(object):
+    __slots__ = ('name','age')      #用tuple定义类允许绑定的属性
+s=Student()
+s.name='Bob'
+s.age=30
+s.score=100                         #绑定此属性报错
+
+class GraduateStudent(Student):
+    pass
+s2=GraduateStudent()
+s2.score=100                        #子类不受__slots__绑定类属性限制
+
+
+
+
