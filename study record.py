@@ -869,4 +869,94 @@ s=Student()
 s.set_score(60)
 s.get_score()
 
+class Student(object):
+    @property
+    def score(self,score):
+        return self._score
+    @score.setter
+    def score(self,score):
+        if not isinstance(score,int):
+            raise ValueError('Score must be integer!')
+        if 0<=score<=100:
+            self._score=score
+        else:
+            raise ValueError('Score must between 0~100!')
+
+'''getter&setter'''
+s=Student()
+s.score=90                         #实际转化为s.set_score(90)
+s.score                            #实际转化为s.get_score()
+
+class Student(object):
+    @property                      #property用来定义读取属性,ie:getter
+    def birth(self):
+        return self._birth
+    @birth.setter                  #setter用来定义写入属性
+    def birth(self,value):
+        self._birth=value
+    @property
+    def age(self):
+        return 2019-self.birth
+
+
+#练习
+class Screen(object):
+    @property
+    def width(self):
+        return self._width
+    @property
+    def height(self):
+        return self._height
+    @property
+    def resolution(self):
+        return self._width*self._height
+    @width.setter
+    def width(self,value1):
+        if not isinstance(value1,int):
+            raise ValueError('Width must be integer!')
+        self._width=value1
+    @height.setter
+    def height(self,value2):
+        if not isinstance(value2,int):
+            raise ValueError('Height must be integer!')
+        self._height=value2
+
+
+# 测试:
+s = Screen()
+s.width = 1024
+s.height = 768
+print('resolution =', s.resolution)
+if s.resolution == 786432:
+    print('测试通过!')
+else:
+    print('测试失败!')        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
