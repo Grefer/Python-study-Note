@@ -853,6 +853,20 @@ class GraduateStudent(Student):
 s2=GraduateStudent()
 s2.score=100                        #子类不受__slots__绑定类属性限制
 
+'''使用@property'''
+class Student(object):
+    def get_score(self):
+        return self._score
+    def set_score(self,score):
+        if not isinstance(score,int):
+            raise ValueError('Score must be integer!')
+        if 0<=score<=100:
+            self._score=score
+        else:
+            raise ValueError('Score must between 0~100!')
 
+s=Student()
+s.set_score(60)
+s.get_score()
 
 
