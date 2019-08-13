@@ -959,7 +959,16 @@ class Dog(Mammal,Runnable):
 class Bat(Mammal,Flyable):
     pass
 
+#MixIn
+class Dog(Mammal,RunnableMixIn,CarnivorousMixIn):
+    pass
 
+class MyTCPServer(TCPServer,ForkingMixIn):             #多进程TCP服务
+    pass
+class MyUDPserver(UDPserver,ThreadingMixIn):           #多线程UDP服务
+    pass
+class MyTCPServer(TCPServer,CoroutineMixIn):           #类MyTCPServer可以访问Coroutine,但不是它的子类
+    pass
 
 
 
