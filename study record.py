@@ -958,7 +958,6 @@ class Dog(Mammal,Runnable):
     pass
 class Bat(Mammal,Flyable):
     pass
-
 #MixIn
 class Dog(Mammal,RunnableMixIn,CarnivorousMixIn):
     pass
@@ -971,6 +970,17 @@ class MyTCPServer(TCPServer,CoroutineMixIn):           #类MyTCPServer可以访�
     pass
 
 
+'''定制类'''
+class Student(object):
+    def __init__(self,name):
+        self.name=name
+    def __str__(self):
+        return 'Student object(name:%s)' % self.name
+    __repr__=__str__
+
+print(Student('Michael'))         #调用__str__，返回用户看到的字符串
+s=Student('Michael')              
+s                                 #调用__repr__，返回开发者看到的字符串，调试
 
 
 
