@@ -1069,7 +1069,7 @@ callable([1,2,3])
 callable(s)             #加入__call__的类实例可调用
 
 '''使用枚举类'''
-from enum import Enum
+from enum import Enum                #Enum可以把一组相关常量定义在一个class中，且class不可变，而且成员可以直接比较
 Month = Enum('Month',('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'))
 
 for name,member in Month.__members__.items():
@@ -1099,7 +1099,21 @@ Weekday(7)
 for name,member in Weekday.__members__.items():
     print(name,'=>',member)
 
-
+#练习
+class Gender(Enum):
+    Male = 0
+    Female = 1
+class Student(object):
+    def __init__(self,name,gender):
+        self.name=name
+        self.gender=gender
+        
+# 测试:
+bart = Student('Bart', Gender.Male)
+if bart.gender == Gender.Male:
+    print('测试通过!')
+else:
+    print('测试失败!')    
 
 
 
