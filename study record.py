@@ -958,9 +958,11 @@ class Dog(Mammal,Runnable):
 class Bat(Mammal,Flyable):
     pass
 #MixIn
+
 class Dog(Mammal,RunnableMixIn,CarnivorousMixIn):
     pass
-
+class Bat(Mammal,FlyableMixIn,CarnivorousMixIn):
+    pass
 class MyTCPServer(TCPServer,ForkingMixIn):             #多进程TCP服务
     pass
 class MyUDPserver(UDPserver,ThreadingMixIn):           #多线程UDP服务
@@ -1220,3 +1222,19 @@ class User(Model):
 
 u = User(id=12345, name='Michael', email='test@orm.org', password='my-pwd')
 u.save()
+
+'''错误处理'''
+from logging import some_function
+def foo():
+    r = some_function()
+    if r == (-1):
+        return (-1)
+    #do something
+    return r
+
+def bar():
+    r = foo()
+    if r ==(-1):
+        print('Error')
+    else:
+        pass
