@@ -1130,8 +1130,7 @@ print(type(h))
 
 def fn(self,name='world'):
     print('Hello,%s' %name)
-    Hello=type('Hello',(object,),dict(hello=fn))    #创建Hello class
-    
+    Hello=type('Hello',(object,),dict(hello=fn))    #创建Hello class   
 h=Hello()
 h.hello()
 print(type(Hello))
@@ -1224,6 +1223,7 @@ u = User(id=12345, name='Michael', email='test@orm.org', password='my-pwd')
 u.save()
 
 '''错误处理'''
+#错误代码
 from logging import some_function
 def foo():
     r = some_function()
@@ -1238,3 +1238,117 @@ def bar():
         print('Error')
     else:
         pass
+
+#try
+try:
+    print('try...')
+    r = 10 / int('2')
+    print('result:',r)
+except ZeroDivisionError as e:
+    print('except:',e)
+except ValueError as e:
+    print('ValueError:',e)
+else:
+    print('No error!')
+finally:
+    print('finally...')
+print('END')
+
+try:
+    foo()
+except ValueError as e:
+    print('ValueError：',e)
+except UnicodeError as e:
+    print('UnicodeError:',e)
+#注意：第二个except永远也捕获不到UnicodeError，因为UnicodeError是ValueError的子类，如果有，也被第一个except给捕获了。
+#常见的错误类型和继承关系：https://docs.python.org/3/library/exceptions.html#exception-hierarchy
+
+def foo(s):
+    return 10/int(s)
+def bar(s):
+    return foo(s)*2
+def main():
+    try:
+        bar('0')
+    except Exception as e:
+        print('Error;',e)
+    finally:
+        print('finally...')
+
+#错误的调用栈
+
+def foo(s):
+    return 10/int(s)
+def bar(s):
+    return foo(s)*2
+def main():
+    bar('0')
+main()
+
+#记录错误
+import logging
+def foo(s):
+    return 10/int(s)
+def bar(s):
+    return foo(s)*2
+def main():
+    try:
+        bar('0')
+    except Exception as e:
+        logging.exception(e)
+main()
+print('END')
+
+#抛出错误
+class FooError(ValueError):
+    pass
+def foo(s):
+    n=int(s)
+    if n==0:
+        raise FooError('Invalid value:%s'%s)
+    return 10/n
+foo('0')
+
+def foo(s):
+    n=int(s)
+    if n==0:
+        raise ValueError('Invalid value:%s'%s)
+    return 10/n
+def bar():
+    try:
+        foo('0')
+    except ValueError as e:
+        print('ValueError!')
+        raise
+bar()
+
+try:
+    10/0
+except ZeroDivisionError:
+    raise ValueError ('Input error')
+
+#练习
+
+from functools import reduce
+
+def str2num(s):
+    try:
+        return int(s)
+    except ValueError:
+        pass
+    try:
+        return float(s)
+    except ValueError:
+        print('The %s is not int or float type' %s)
+def calc(exp):
+    ss = exp.split('+')
+    ns = map(str2num, ss)
+    return reduce(lambda acc, x: acc + x, ns)
+
+def main():
+    r = calc('100 + 200 + 345')
+    print('100 + 200 + 345 =', r)
+    r = calc('99 + 88 + 7.6')
+    print('99 + 88 + 7.6 =', r)
+
+main()
