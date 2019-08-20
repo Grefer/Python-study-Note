@@ -1352,3 +1352,44 @@ def main():
     print('99 + 88 + 7.6 =', r)
 
 main()
+
+'''调试'''
+
+#print
+def foo(s):
+    n=int(s)
+    print('>>>n=%d'%n)
+    return 10/n
+def main():
+    foo('0')
+main()
+
+#断言
+def foo(s):
+    n=int(s)
+    assert n!=0,'n is zero!'      #断言n!=0，否则就调用AssertionError
+    return 10/n
+def main():
+    foo('0')
+main()
+
+'''启动Python解释器时可以用-O参数来关闭assert,断言的开关“-O”是英文大写字母O，不是数字0'''
+
+#logging
+import logging
+logging.basicConfig(level=logging.INFO)    #指定记录信息的级别debug/info/warning/error
+s='0'
+n=int(s)
+logging.info('n=%d'%n)
+print(10/n)
+
+#pdb&pdb.set_trace()
+'''启动Python的调试器pdb，让程序以单步方式运行，可以随时查看运行状态
+import pdb，在可能出错的地方放一个pdb.set_trace()，设置一个断点'''
+#IDE
+'''
+目前比较好的Python IDE有：
+Visual Studio Code：https://code.visualstudio.com/，需要安装Python插件。
+PyCharm：http://www.jetbrains.com/pycharm/
+'''
+
