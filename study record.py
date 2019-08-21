@@ -1405,5 +1405,26 @@ class Dict(dict):
     def __setattr__(self,key,value):
         self[key]=value
 
-
-    
+import unittest
+from mydict import Dict
+class TestDict(unittest):
+    def test_init(self):
+        d=Dict(a=1,b='test')
+        self.asserEqual(d.a,1)
+        self.asserEqual(d.b,'test')
+        self.assertTrue(isinstance(d,dict))
+    def test_key(self):
+        d= Dict()
+        d['key']= 'value'
+        self.assertEqual(d.key,'value')
+    def test_attr(self):
+        d=Dict()
+        d.key='value'
+        self.assertTrue('key' in d)
+        self.assertEqual(d['key'],'value')
+    def test_keyerror(self):
+        d=Dict()
+        with self.assertRaises(AttributeError):
+            value=d.empty
+if __name__ == '__main__':
+    unittest.main()  
