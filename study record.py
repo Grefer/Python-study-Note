@@ -1428,3 +1428,12 @@ class TestDict(unittest):
             value=d.empty
 if __name__ == '__main__':
     unittest.main()  
+
+#setUp&tearDown
+class TestDict(unittest.TestCase):
+
+    def setUp(self):
+        print('setUp...')
+
+    def tearDown(self):
+        print('tearDown...')
