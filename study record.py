@@ -1547,3 +1547,43 @@ def fact(n):
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
+    
+'''IO编程-文件读写'''
+
+f=open(r"C:\Users\Admin\Documents\GitHub\Python-study-Note\GBM.py")
+f.read()     #文件路径前加 r 表示非转义字符
+f.close()
+
+try:
+    f=open(r"C:\Users\Admin\Documents\GitHub\Python-study-Note\GBM.py")
+    print(f.read())
+finally:
+    if f:
+        f.close()
+
+with open(r"C:\Users\Admin\Documents\GitHub\Python-study-Note\GBM.py") as f:
+    print(f.read())
+
+#file like object
+'''
+像open()函数返回的这种有个read()方法的对象，在Python中统称为file-like Object,
+file-like Object不要求从特定类继承，只要写个read()方法就行,
+StringIO就是在内存中创建的file-like Object，常用作临时缓冲
+'''
+#二进制文件
+'''读取二进制文件，比如图片、视频等等，用'rb'模式打开文件即可'''
+with open(r'E:\picture.png','rb') as f:
+    print(f.read())
+#写文件
+with open(r'C:\Users\Admin\Documents\GitHub\Python-study-Note\GBM.py','w') as f:
+    f.write('Hello,world')
+with open(r'C:\Users\Admin\Documents\GitHub\Python-study-Note\GBM.py','r') as f:
+    print(f.read())          #'r'表示读取，'w'表示写入(覆盖慎用啊！)，'a'表示增加
+
+#练习
+fpath = r'C:\Windows\system.ini'
+
+with open(fpath, 'r') as f:
+    s = f.read()
+    print(s)
+
