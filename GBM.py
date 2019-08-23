@@ -30,4 +30,3 @@ plt.xlabel("Time t",fontsize=16)
 plt.ylabel("Value St",fontsize=16)
 plt.title("dSt=μStdt+σStdWt",fontsize=18)
 plt.show()
-
