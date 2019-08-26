@@ -1587,3 +1587,11 @@ with open(fpath, 'r') as f:
     s = f.read()
     print(s)
 
+'''StringIO'''
+from io import StringIO
+f=StringIO()
+f.write('hello')
+f.write(' ')
+f.write('world!')
+print(f.getvalue())
+
