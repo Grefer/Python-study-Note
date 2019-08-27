@@ -1613,6 +1613,39 @@ from io import BytesIO
 f=BytesIO(b'\xe4\xb8\xad\xe6\x96\x87')
 f.read()
 
+'''操作文件和目录'''
+import os
+os.name       #posix，代表Linux、Unix或Mac；nt，代表Windows
+os.uname_result
+
+#环境变量
+os.environ
+os.environ.get('PATH')
+
+#查看当前目录的绝对路径
+os.path.abspath('.')
+# 在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:
+os.path.join('C:\\User\\Admin','testdir')    #合并路径
+## 然后创建一个目录:
+os.mkdir('C:\\User\\Admin\\testdir')
+# 删掉一个目录
+os.rmdir('C:\\User\\Admin\\testdir')
+
+os.path.split('C:\\User\\Admin\\testdir')    #拆分路径
+
+os.path.splitext('C:\\User\\Admin\\testdir\\test.txt')  #获取拓展名
+
+os.rename('test.txt','test.py')   #更改文件名
+
+os.remove('test.py')              #删除文件
+
+#列出当前目录所有文件
+[x for x in os.listdir('.') if os.path.isdir(x)]
+#列出拓展名为py的文件
+[x for x in os.listdir('.') if os.path.isfile(x) and os.path.splitext(x)[1]=='.py']
+
+#
+
 
 
     
