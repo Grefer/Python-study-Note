@@ -1644,7 +1644,24 @@ os.remove('test.py')              #删除文件
 #列出拓展名为py的文件
 [x for x in os.listdir('.') if os.path.isfile(x) and os.path.splitext(x)[1]=='.py']
 
-#
+#输入关键字查找文件
+import os
+def get_all(path=os.path.abspath('.'),res=[]):
+    for x in os.listdir(path):
+        if os.path.isdir(x):
+            get_all(x,res)
+        else:
+            res.append(x)
+    return res
+def search(k):
+    def _match(x):
+        return x.find(k) >-1
+    return list(filter(_match,get_all()))
+key=input('Please input the key word:')
+for x in list(map(lambda x:'filename:%s abs path:%s\n' %(x,os.path.abspath(x)),search('key'))):
+    print(x)
+
+    
 
 
 
