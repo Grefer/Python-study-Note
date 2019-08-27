@@ -1655,7 +1655,7 @@ def get_all(path=os.path.abspath('.'),res=[]):
     return res
 def search(k):
     def _match(x):
-        return x.find(k) >-1
+        return x.find(k) !=-1   #find() 检测字符串中是否包含子字符串 str,是返回开始的索引值，否则返回-1
     return list(filter(_match,get_all()))
 key=input('Please input the key word:')
 for x in list(map(lambda x:'filename:%s abs path:%s\n' %(x,os.path.abspath(x)),search('key'))):
