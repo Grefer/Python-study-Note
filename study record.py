@@ -1661,9 +1661,22 @@ key=input('Please input the key word:')
 for x in list(map(lambda x:'filename:%s abs path:%s\n' %(x,os.path.abspath(x)),search('key'))):
     print(x)
 
+'''序列化pickling(把变量从内存中变成可存储或传输的过程称之为序列化)'''
+import pickle
+d=dict(name='Mary',age=23,score=88)
+pickle.dumps(d)    #把任意对象序列化成一个bytes,然后就可以把这个bytes写入文件
+f=open('dump.txt','wb')
+pickle.dump(d,f)  #pickle.dump()直接把对象序列化后写入一个file-like Object
+f.close()  
     
+f=open('dump.txt','rb')
+d=pickle.load(f)
+f.close()
+d
 
-
-
-    
-
+#JSON 序列化标准格式
+import json
+d=dict(name='Mary',age=23,score=88)
+json.dumps(d)     #dumps()方法返回一个str,内容就是标准的JSON
+json_str='{"name": "Mary", "age": 23, "score": 88}'
+json.loads(json_str)
