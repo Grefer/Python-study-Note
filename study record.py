@@ -1680,3 +1680,38 @@ d=dict(name='Mary',age=23,score=88)
 json.dumps(d)     #dumps()方法返回一个str,内容就是标准的JSON
 json_str='{"name": "Mary", "age": 23, "score": 88}'
 json.loads(json_str)
+
+#JSON进阶
+import json
+class Student(object):
+    def __init__(self,name,age,score):
+        self.name=name
+        self.age=age
+        self.score=score
+s=Student('Mary',23,88)
+#print(json.dumps(s))   #默认情况下，dumps()方法不知道如何将类实例变为一个JSON的{}对象
+
+#转换函数
+def student2dict(std):
+    return {'name': std.name,
+            'age':  std.age,
+            'score':std.score
+            }     
+#可选参数default就是把任意一个对象变成一个可序列为JSON的对象
+print(json.dumps(s,default=student2dict))
+#通用方法，使用实例的__dict__属性
+print(json.dumps(s,default=lambda obj:obj.__dict__))    
+
+def dict2student(d):
+    return Student(d['name'],d['age'],d['score'])
+
+json_str = '{"age": 20, "score": 88, "name": "Bob"}'
+#object_hook函数负责把dict转换为Student实例
+print(json.loads(json_str,object_hook=dict2student))
+
+#练习
+import json
+obj= dict(name='小明',age=23)
+s = json.dumps(obj,ensure_ascii=False)
+s
+#ensure_ascii=True时，中文被转换为ASCII码，ensure_ascii=False时，中文不转换
