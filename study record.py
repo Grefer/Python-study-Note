@@ -1948,9 +1948,6 @@ def test():
             n = random.randint(0,10000)
             print('Put task %d...' %n)
             task.put(n)
-        #每秒检测一次任务是否完成
-        while not result.full():
-            time.sleep(1);
         #从result队列读取结果
         print('Try get result...')
         for i in range(10):
@@ -1999,7 +1996,7 @@ for i in range(10):
         r = '%d * %d = %d' % (n, n, n*n)
         time.sleep(1)
         result.put(r)
-    except Queue.Empty:
+    except queue.Empty:
         print('task queue is empty.')
 # 处理结束:
 print('worker exit.')
