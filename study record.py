@@ -1923,11 +1923,12 @@ result_queue = queue.Queue()
 #从BaseManager继承的QueueManager
 class QueueManager(BaseManager):
     pass
+
 #windows环境下绑定调用接口不能使用lambda，所以先定义函数
 def get_task():
     return task_queue
 def get_result():
-    return result.queue
+    return result_queue
 def test():
     
     #把两个Queue都注册到网络上，callable参数关联了Queue对象
@@ -1946,10 +1947,10 @@ def test():
         for i in range(10):
             n = random.randint(0,10000)
             print('Put task %d...' %n)
-        task.put(n)
+            task.put(n)
         #每秒检测一次任务是否完成
         while not result.full():
-                time.sleep(1);
+            time.sleep(1);
         #从result队列读取结果
         print('Try get result...')
         for i in range(10):
@@ -1965,7 +1966,7 @@ def test():
 #使用freeze缓解多线程爆炸的问题
 if __name__ == '__main__':
     freeze_support()
-    test();
+    test()
 
 
 #task_work.py
