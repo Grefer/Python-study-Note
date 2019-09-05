@@ -2001,3 +2001,59 @@ for i in range(10):
 # 处理结束:
 print('worker exit.')
 
+'''正则表达式'''
+
+#re模块
+import re
+re.match(r'^\d{3}\-\d{3-8}$','010-12345')
+re.match(r'^\d{3}\-\d{3,8}$', '010 12345')
+
+test = input('Please input your phone No.:')
+if re.match(r'^\d{3}\-\d{3-8}$', test):
+    print('ok')
+else:
+    print('failed')
+
+#切分字符串
+'a b   c'.split(' ')
+re.split(r'\s+', 'a b   c')
+re.split(r'[\s\,]+', 'a,b, c  d')
+re.split(r'[\s\,\;]+', 'a,b;; c  d')
+
+#分组
+m = re.match(r'^(\d{3})-(\d{3,8})$', '010-12345')   #()表示分组
+m.group(0)
+m.group(1)
+m.group(2)
+
+t = '19:05:30'
+m = re.match(r'^(0[0-9]|1[0-9]|2[0-3]|[0-9])\:(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|[0-9])\:(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|[0-9])$', t)
+m.groups()
+
+#贪婪匹配
+re.match(r'^(\d+)(0*)$', '102300').groups()
+re.match(r'^(\d+?)(0*)$', '102300').groups()
+
+#编译
+import re
+re_telephone = re.compile(r'(\d{3})-(\d{3,8})$')
+re_telephone.match('010-12345').groups()
+re_telephone.match('010-4353').groups()
+
+#练习
+def is_valid_email(addr):
+    if re.match(r'^\w+_?\w*@\w+?.*([.edu]|[.com]|[.org])[.cn]?',addr):
+        return True
+    else:
+        return False
+
+
+#测试
+assert is_valid_email('Clare_bove@china.com.cn')
+assert is_valid_email('bove@163.tbsc.edu.cn')
+assert is_valid_email('bove114@163.com')
+assert is_valid_email('205023323@cmsn.edu.cn')
+assert is_valid_email('seft123@animal.org.cn')
+assert not is_valid_email('bob#example.com')
+assert not is_valid_email('mr-bob@example.com')
+print('ok')
