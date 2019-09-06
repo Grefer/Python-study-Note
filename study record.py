@@ -2057,3 +2057,58 @@ assert is_valid_email('seft123@animal.org.cn')
 assert not is_valid_email('bob#example.com')
 assert not is_valid_email('mr-bob@example.com')
 print('ok')
+
+'''常用内建模块'''
+#datetime
+from datetime import datetime   #datetime模块包含datetime类
+now=datetime.now()
+print(now)
+print(type(now))
+
+dt=datetime(2015,5,1,12,20)   # 用指定日期时间创建datetime
+print(dt)
+dt.timestamp()            # 把datetime转换为timestamp
+
+t=1429417200.0
+print(datetime.fromtimestamp(t))   # 本地时间
+print(datetime.utcfromtimestamp(t))  #UTC时间
+
+cday=datetime.strptime('2019-09-03 15:49:00','%Y-%m-%d %H:%M:%S')
+print(cday)   #str转换为datetime
+
+now=datetime.now()
+print(now.strftime('%a,%b %d %H:%M'))  #datetime转换为str
+#datetime加减
+from datetime import timedelta
+now=datetime.now()
+now
+now+timedelta(hours=10)
+now-timedelta(days=1)
+now+timedelta(days=2,hours=12)
+#本地时间转换为UTC时间
+from datetime import timezone
+tz_utc_8=timezone(timedelta(hours=8))
+now=datetime.now()
+now
+dt=now.replace(tzinfo=tz_utc_8)
+dt
+#时区转换
+
+# 拿到UTC时间，并强制设置时区为UTC+0:00:
+utc_dt=datetime.utcnow().replace(tzinfo=timezone.utc)
+print(utc_dt)
+# astimezone()将转换时区为北京时间:
+bj_dt = utc_dt.astimezone(timezone(timedelta(hours=8)))
+print(bj_dt)
+# astimezone()将转换时区为东京时间:
+tk_dt = utc_dt.astimezone(timezone(timedelta(hours=9)))
+print(tk_dt)
+# astimezone()将bj_dt转换时区为东京时间:
+tk2_dt = bj_dt.astimezone(timezone(timedelta(hours=9)))
+print(tk2_dt)
+
+#练习
+def to_timestamp(dt_str,tz_str):
+    
+
+ 
