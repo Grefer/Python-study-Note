@@ -2122,4 +2122,87 @@ t1 = to_timestamp('2015-6-1 08:10:30', 'UTC+7:00')
 assert t1 == 1433121030.0, t1
 t2 = to_timestamp('2015-5-31 16:10:30', 'UTC-09:00')
 assert t2 == 1433121030.0, t2
-print('ok') 
+print('ok')
+
+'''Collections'''
+#namedtuple
+from collections import namedtuple
+Point=namedtuple('Point',['x','y'])
+p=Point(1,2)
+p.x
+p.y
+isinstance(p,Point)
+isinstance(p,tuple)
+
+# namedtuple('名称', [属性list]):
+Circle = namedtuple('Circle', ['x', 'y', 'r'])
+
+#deque
+from collections import deque
+q=deque(['a','b','c'])
+q.append('x')
+q.appendleft('y')
+q.pop()
+q.popleft()
+q
+
+#defaultdict
+from collections import defaultdict
+dd=defaultdict(lambda:'N/A')
+dd['key1']='abc'
+dd['key1']
+dd['key2']
+
+#ordereddict
+from collections import OrderedDict
+d=dict([('a',1),('b',2),('c',3)])
+d
+od=OrderedDict([('a',1),('b',2),('c',3)])
+od          #按照插入的顺序排序，并未key值本身
+#FIFO dict
+class LastUpdatedOrderedDict(OrderedDict):
+    def __init__(self,capacity):
+        super(LastUpdatedOrderedDict,self).__init__()
+        self._capacity=capacity
+        
+    def __setitem__(self,key,value):
+        containsKey = 1 if key in self else 0
+        if len(self)-constainKey >= self._capacity:
+            last=self.popitem(last=False)
+            print('Remove:' ,last)
+        if containKey:
+            del self[key]
+            print('Set:',(key,value))
+        else:
+            print('Add:',(key,value))
+        OrderedDict.__setitem__(self,key,value)
+
+#ChainMap
+from collections import ChainMap
+import os,argparse
+#构造缺省参数:
+defaults={
+        'color':'red',
+        'user':'guest'
+        }
+# 构造命令行参数:
+parser=argparse.ArgumentParser()
+parser.add_argument('-u','--user')
+parser.add_argument('-c','--color')
+namespace = parser.parse_args()
+command_line_args={k:v for k,v in vars(namespace).items() if v}
+
+# 组合成ChainMap:
+combined=ChainMap(command_line_args,os.environ,defaults)
+
+# 打印参数:
+print('color=%s' % combined['color'])
+print('user=%s' % combined['user'])
+
+#counter计数器
+
+from collections import Counter
+c=Counter()
+for ch in 'Programming':
+    c[ch]=c[ch]+1
+c
