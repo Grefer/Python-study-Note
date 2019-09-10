@@ -2206,3 +2206,25 @@ c=Counter()
 for ch in 'Programming':
     c[ch]=c[ch]+1
 c
+
+'''base64'''
+
+import base64
+base64.b64encode(b'binary\x00string')
+base64.b64decode(b'YmluYXJ5AHN0cmluZw==')
+
+base64.b64encode(b'i\xb7\x1d\xfb\xef\xff')    #结尾有'+'和'/'
+base64.urlsafe_b64encode(b'i\xb7\x1d\xfb\xef\xff')  #把字符+和/分别变成-和_
+
+#练习：请写一个能处理去掉=的base64解码函数：
+def safe_base64_decode(s):
+    r=len(s)%4
+    if r==0:
+        return base64.urlsafe_b64decode(s)
+    else:
+        return base64.urlsafe_b64decode(s+(4-r)*b'=')
+
+# 测试:
+assert b'abcd' == safe_base64_decode(b'YWJjZA=='), safe_base64_decode('YWJjZA==')
+assert b'abcd' == safe_base64_decode(b'YWJjZA'), safe_base64_decode('YWJjZA')
+print('ok')
