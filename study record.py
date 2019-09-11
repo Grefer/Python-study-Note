@@ -2228,3 +2228,36 @@ def safe_base64_decode(s):
 assert b'abcd' == safe_base64_decode(b'YWJjZA=='), safe_base64_decode('YWJjZA==')
 assert b'abcd' == safe_base64_decode(b'YWJjZA'), safe_base64_decode('YWJjZA')
 print('ok')
+
+'''struct'''
+
+import struct
+struct.pack('>I',10240099)
+#>表示字节顺序是big-endian，也就是网络序，I表示4字节无符号整数
+struct.unpack('>IH',b'\xf0\xf0\xf0\xf0\x80\x80')
+#bytes依次变为I：4字节无符号整数和H：2字节无符号整数
+s = b'\x42\x4d\x38\x8c\x0a\x00\x00\x00\x00\x00\x36\x00\x00\x00\x28\x00\x00\x00\x80\x02\x00\x00\x68\x01\x00\x00\x01\x00\x18\x00'
+struct.unpack('<ccIIIIIIHH',s)
+#b'B'、b'M'说明是Windows位图，位图大小为640x360，颜色数为24
+
+#练习
+def bmp_info(data):
+    t_struct=struct.unpack('<ccIIIIIIHH',data[:30])
+    if t_struct[0]==b'B' and t_struct[1]==b'M':
+        return {
+        'width': t_struct[6],
+        'height': t_struct[7],
+        'color': t_struct[9]
+        }
+    else:
+        print('It\'s not a bmp file')
+
+# 测试
+import base64,struct
+bmp_data = base64.b64decode('Qk1oAgAAAAAAADYAAAAoAAAAHAAAAAoAAAABABAAAAAAADICAAASCwAAEgsAAAAAAAAAAAAA/3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9/AHwAfAB8AHwAfAB8AHwAfP9//3//fwB8AHwAfAB8/3//f/9/AHwAfAB8AHz/f/9//3//f/9//38AfAB8AHwAfAB8AHwAfAB8AHz/f/9//38AfAB8/3//f/9//3//fwB8AHz/f/9//3//f/9//3//f/9/AHwAfP9//3//f/9/AHwAfP9//3//fwB8AHz/f/9//3//f/9/AHwAfP9//3//f/9//3//f/9//38AfAB8AHwAfAB8AHwAfP9//3//f/9/AHwAfP9//3//f/9//38AfAB8/3//f/9//3//f/9//3//fwB8AHwAfAB8AHwAfAB8/3//f/9//38AfAB8/3//f/9//3//fwB8AHz/f/9//3//f/9//3//f/9/AHwAfP9//3//f/9/AHwAfP9//3//fwB8AHz/f/9/AHz/f/9/AHwAfP9//38AfP9//3//f/9/AHwAfAB8AHwAfAB8AHwAfAB8/3//f/9/AHwAfP9//38AfAB8AHwAfAB8AHwAfAB8/3//f/9//38AfAB8AHwAfAB8AHwAfAB8/3//f/9/AHwAfAB8AHz/fwB8AHwAfAB8AHwAfAB8AHz/f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//3//f/9//38AAA==')
+bi = bmp_info(bmp_data)
+assert bi['width'] == 28
+assert bi['height'] == 10
+assert bi['color'] == 16
+print('ok')
+        
