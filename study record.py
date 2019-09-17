@@ -2367,3 +2367,53 @@ assert not login('michael', '1234567')
 assert not login('bob', '123456')
 assert not login('alice', 'Alice2008')
 print('ok')
+
+'''itertools'''
+import itertools
+natuals=itertools.count(1)
+for n in natuals:
+    print(n)
+
+cs=itertools.cycle('ABC')
+for n in cs:
+    print(n)    
+
+ns=itertools.repeat('A',3)
+for n in ns:
+    print(n)
+
+nl=itertools.takewhile(lambda x: x <= 10,natuals)
+list(nl)
+
+'''Chain'''
+for c in itertools.chain('ABC','XYZ'):
+    print(c)
+'''Groupby'''
+for key,group in itertools.groupby('AAABBBCCCAAA'):
+    print(key,list(group))
+    
+for key,group in itertools.groupby('AaBBbCcAAa',lambda c:c.upper()):
+    print(key,list(group))
+
+#练习：计算pi的值
+import itertools
+def pi(N):   
+    # step 1: 创建一个奇数序列: 1, 3, 5, 7, 9, ...
+    odd=itertools.count(1,2)
+    # step 2: 取该序列的前N项: 1, 3, 5, 7, 9, ..., 2*N-1.
+    oddn=itertools.takewhile(lambda x:x<=(2*N-1),odd)
+    # step 3: 添加正负符号并用4除: 4/1, -4/3, 4/5, -4/7, 4/9, ...
+    odd4_n=map(lambda x:(-1)**((x+1)/2+1)*(4/x),oddn)
+    # step 4: 求和:
+    return sum(odd4_n)
+
+# 测试:
+print(pi(10))
+print(pi(100))
+print(pi(1000))
+print(pi(10000))
+assert 3.04 < pi(10) < 3.05
+assert 3.13 < pi(100) < 3.14
+assert 3.140 < pi(1000) < 3.141
+assert 3.1414 < pi(10000) < 3.1415
+print('ok')
