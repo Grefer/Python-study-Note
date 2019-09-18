@@ -2417,3 +2417,48 @@ assert 3.13 < pi(100) < 3.14
 assert 3.140 < pi(1000) < 3.141
 assert 3.1414 < pi(10000) < 3.1415
 print('ok')
+
+'''contextlib'''
+from contextlib import contextmanager
+
+class Query(object):
+    def __init__(self,name):
+        self.name=name
+        
+    def query(self):
+        print('Query info about %s:' %self.name)
+
+@contextmanager
+def create_query(name):
+    print('Begin')
+    q=Query(name)
+    yield q
+    print('End')
+
+with create_query('Bob') as q:
+    q.query()
+
+@contextmanager
+def tag(name):
+    print("<%s>" % name)
+    yield
+    print("</%s>" % name)
+
+with tag("h1"):
+    print("hello")
+    print("world")
+
+#@closing
+from contextlib import closing
+from urllib.request import urlopen
+
+with closing(urlopen('https://www.python.org')) as page:
+    for line in page:
+        print(line)
+
+@contextmanager
+def closing(thing):
+    try:
+        yield thing
+    finally:
+        thing.close()
