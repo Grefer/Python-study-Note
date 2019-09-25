@@ -2757,3 +2757,32 @@ for t in range(4):
 image = image.filter(ImageFilter.BLUR)
 image.save('code.jpg', 'jpeg')
 
+'''request'''
+import requests
+r=requests.get('https://www.douban.com')
+r.status_code
+r.text
+r = requests.get('https://www.douban.com/search', params={'q': 'python', 'cat': '1001'})
+r.url
+r.encoding
+r.content
+r = requests.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json')
+r.json
+r = requests.get('https://www.douban.com/', headers={'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit'})
+r.text
+#发送post请求
+r = requests.post('https://accounts.douban.com/login', data={'form_email': 'abc@example.com', 'form_password': '123456'})
+#传入JSON
+params = {'key': 'value'}
+r = requests.post('https://accounts.douban.com/login', json=params)
+#上传文件
+upload_files={'file':open('report.xls','rb')}   #务必'rb'二进制读取
+r=requests.post('https://accounts.douban.com/login',files=upload_files)
+r.headers
+r.headers['Date']
+r.cookie['ts']
+#请求时传入cookie
+cs = {'token': '12345', 'status': 'working'}
+r=requests.get('https://accounts.douban.com/login',cookies=cs)
+#指定超时时间
+r=requests.get('https://accounts.douban.com/login',timeout=2.5)
