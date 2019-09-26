@@ -2786,3 +2786,20 @@ cs = {'token': '12345', 'status': 'working'}
 r=requests.get('https://accounts.douban.com/login',cookies=cs)
 #指定超时时间
 r=requests.get('https://accounts.douban.com/login',timeout=2.5)
+
+'''chardet'''
+#检测编码
+import chardet
+chardet.detect(b'Hello,world!')
+
+data='离离原上草，一岁一枯荣'.encode('gbk')
+chardet.detect(data)
+
+data='离离原上草，一岁一枯荣'.encode('utf-8')
+chardet.detect(data)
+
+data = '最新の主要ニュース'.encode('euc-jp')
+chardet.detect(data)
+
+data='不灭之刃'.encode('gbk')
+chardet.detect(data)
