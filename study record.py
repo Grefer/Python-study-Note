@@ -2803,3 +2803,48 @@ chardet.detect(data)
 
 data='不灭之刃'.encode('gbk')
 chardet.detect(data)
+
+'''psutil'''
+import psutil
+#获取CPU信息
+psutil.cpu_count()
+psutil.cpu_count(logical=False)
+psutil.cpu_times()
+for x in range(10):
+    psutil.cpu_percent(interval=1,percpu=True)
+#获取内存信息
+psutil.virtual_memory()
+psutil.swap_memory()
+#获取磁盘信息
+psutil.disk_partitions()
+psutil.disk_usage('/')
+psutil.disk_io_counters()
+#获取网络信息
+psutil.net_io_counters()
+psutil.net_if_addrs()
+psutil.net_if_stats()
+psutil.net_connections()
+#获取进程信息
+psutil.pids()
+p=psutil.Process(8104)
+p.name()
+p.exe()
+p.cwd()
+p.cmdline()
+p.ppid()
+p.parent()
+p.children()
+p.status()
+p.username()
+p.create_time()
+p.terminal()
+p.cpu_times()
+p.memory_info()
+p.open_files()
+p.connections()
+p.num_threads()
+p.threads()
+p.environ()
+p.terminate()
+
+psutil.test()
