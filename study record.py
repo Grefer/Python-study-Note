@@ -3100,5 +3100,56 @@ for data in [b'Michael', b'Tracy', b'Sarah']:
 s.close()
 
 
+'''SMYP发送邮件'''
+from mail.mime.text import MIMEText
+#plain表示纯文本
+msg=MIMEText('hello! send by python...','palin','utf-8')
+
+#输入email地址和密码
+from_addr = input('From:')
+password = input('Password:')
+
+#输入收件人地址
+to_addr=input('To:')
+#输入SMTP服务器地址
+smtp_server=input('SMTP server:')
+
+import smtplib
+server=smtplib.SMTP(smtp_server,25)
+#打印出和SMTP服务器交互的所有信息
+server.set_debuglevel(1)
+server.login(from_addr,password)
+server.sendmail(from_addr,[to_addr],msg.as_string())
+server.quit()
+
+
+#完整邮件
+from email import encoders
+from email.header import Header
+from email.mime.text import MIMEText
+from email.utils import parseaddr,formataddr
+
+import smtplib
+ 
+def _format_addr(s):
+    name,addr=parseaddr(s)
+    return formataddr((Header(name,'utf-8').encode(),addr))
+
+from_addr=input('From:')
+password=input('Password:')
+to_addr=input('To:')
+smtp_server=input('SMTP server:')
+
+msg=MIMEText('Hello,send by Python...','plain','utf-8')
+msg['From']=_format_addr('Python爱好者<%s>'%from_addr)
+msg['To']=_format_addr('管理员<%s>'% to_addr)
+msg['Subject']=Header('来自SMTP的问候……','utf-8').encode()
+
+server=smtplib.SMTP(smtp_server,25)
+server.set_debuglevel(1)
+server.login(from_addr,password)
+server.sendmail(from_addr,[to_addr],msg.as_string())
+server.quit()
+
 
     
