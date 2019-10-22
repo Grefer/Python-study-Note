@@ -3151,5 +3151,20 @@ server.login(from_addr,password)
 server.sendmail(from_addr,[to_addr],msg.as_string())
 server.quit()
 
+#发送HTML邮件
 
+msg=MIMEText('<html><body><h1>Hello</h1>' +
+    '<p>send by <a href="http://www.python.org">Python</a>...</p>' +
+    '</body></html>', 'html', 'utf-8')
+
+#包含附件
+
+msg=MIMEMultipart()
+msg['From']=_format_addr('Python爱好者<%s>' % from_addr)
+msg['To']=_format_addr('管理员<%s>' % to_addr)
+msg['Subject']=Header('来自SMTP的问候......','utf-8').encode()
+
+msg.attach(MIMEText('Send with file...','plain','utf-8'))
+
+    
     
