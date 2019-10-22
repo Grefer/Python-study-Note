@@ -3174,7 +3174,7 @@ with open('/Users/Admin/Downloads/test.png', 'rb') as f:
     
     mime.set_payload(f.read())
     encoders.encode_base64(mime)
-    msg.attach(mime)
+    msg.attach(mime)    #注意msg类型已变为MIMEMultipart
 
 
 
