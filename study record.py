@@ -3166,5 +3166,16 @@ msg['Subject']=Header('来自SMTP的问候......','utf-8').encode()
 
 msg.attach(MIMEText('Send with file...','plain','utf-8'))
 
+with open('/Users/Admin/Downloads/test.png', 'rb') as f:
+    mime=MIMEBase('image','png',filename='test.png')
+    mime.add_header('Content-Disposition','attachment',filename='test.png')
+    mime.add_header('Content-ID','<0>')
+    mime.add_header('X-Attachment-ID','0')
     
+    mime.set_payload(f.read())
+    encoders.encode_base64(mime)
+    msg.attach(mime)
+
+
+
     
