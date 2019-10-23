@@ -3159,6 +3159,8 @@ msg=MIMEText('<html><body><h1>Hello</h1>' +
 
 #包含附件
 
+import smtplib
+from email.mime.text import MIMEText
 msg=MIMEMultipart()
 msg['From']=_format_addr('Python爱好者<%s>' % from_addr)
 msg['To']=_format_addr('管理员<%s>' % to_addr)
@@ -3176,6 +3178,31 @@ with open('/Users/Admin/Downloads/test.png', 'rb') as f:
     encoders.encode_base64(mime)
     msg.attach(mime)    #注意msg类型已变为MIMEMultipart
 
+#发送图片
 
+msg.attach(MIMEText('<html><body><h1>Hello</h1>' +
+    '<p><img src="cid:0"></p>' +
+    '</body></html>', 'html', 'utf-8'))
+
+#同时支持plain和HTML
+
+msg = MIMEMultipart('alternative')
+msg['From'] = ...
+msg['To'] = ...
+msg['Subject'] = ...
+
+msg.attach(MIMEText('hello', 'plain', 'utf-8'))
+msg.attach(MIMEText('<html><body><h1>Hello</h1></body></html>', 'html', 'utf-8'))
+
+#加密SMTP
+smtp_server = 'smtp.gmail.com'
+smtp_port = 587
+server = smtplib.SMTP(smtp_server, smtp_port)
+server.starttls()
+# 剩下的代码和前面的一模一样:
+server.set_debuglevel(1)
+server.login(from_addr,password)
+server.sendmail(from_addr,[to_addr],msg.as_string())
+server.quit()
 
     
