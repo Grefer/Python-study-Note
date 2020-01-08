@@ -10,7 +10,7 @@ import math
 
 R=4.15       #current rate(%)
 K=4.10       #exercise rate*(%)
-r= 2.5992      #risk-free rate(%)
+r= 2.55      #risk-free rate(%)
 sigma=25   #valatility rate(%)
 T=1          #option term(Y)
 
