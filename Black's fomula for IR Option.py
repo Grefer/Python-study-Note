@@ -8,20 +8,20 @@ Created on Tue Jan  7 14:22:53 2020
 from scipy.stats import norm
 import math
 
-R=4.15       #current rate(%)
-K=4.10       #exercise rate*(%)
-r= 2.55      #risk-free rate(%)
-sigma=25   #valatility rate(%)
-T=1          #option term(Y)
+L=1         #nominal principal(M)
+F=4.2       #forward rate(%)
+K=4.1       #exercise rate*(%)
+r= 2.55     #risk-free rate(%)
+sigma=20     #valatility rate(%)
+t=1         #option start time
+T=0.25       #option term(Y)
 
-d1=(math.log(R/K)+math.pow(sigma/100,2)*T/2)/(sigma/100*math.sqrt(T))
-d2=d1-sigma/100*math.sqrt(T)
+d1=(math.log(F/K)+math.pow(sigma/100,2)*t/2)/(sigma/100*math.sqrt(t))
+d2=d1-sigma/100*math.sqrt(t)
 
-if K>=R:
-    c=math.exp(-r/100*T)*(R/100*norm.cdf(d1)-K/100*norm.cdf(d2))*10000
-    print('The call option fee is :%.2f BP'%c)
-else:
-    p=math.exp(-r/100*T)*(K/100*norm.cdf(d2)-R/100*norm.cdf(-d1))*10000
-    print('The put option fee is :%.2f BP'%p)
-
+c=T*math.exp(-r/100*(T+t))*(F/100*norm.cdf(d1)-K/100*norm.cdf(d2))*10000    
+f=T*math.exp(-r/100*(T+t))*(K/100*norm.cdf(-d2)-F/100*norm.cdf(-d1))*10000
+print('d1=%.4f,d2=%.4f'%(d1,d2))
+print('The caplet price rate is:%.2f BP,and the floorlets price rate is:%.2f BP'%(c,f))
+print('The caplet price is:%.2f,and the floorlet price is:%.2f'%(c*L*100,f*L*10000))
 
