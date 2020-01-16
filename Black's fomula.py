@@ -11,7 +11,7 @@ import math
 L=1         #nominal principal(M)
 F=4.2       #forward rate(%)
 K=4.1       #exercise rate*(%)
-r= 2.5     #risk-free rate(%)
+r= 2.55     #risk-free rate(%)
 sigma=20     #valatility rate(%)
 t=0.25         #option start time
 T=1       #option term(Y)
