@@ -3304,7 +3304,9 @@ def guess_charset(msg):
             charset = content_type[pos + 8:].strip()
     return charset
 
-
+#正态分布表
+from scipy.stats import norm
+norm.cdf(0.05)
 
           
 
