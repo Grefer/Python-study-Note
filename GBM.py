@@ -12,7 +12,7 @@ rect = [0.1,5.0,0.1,0.1]
 fig = plt.figure(figsize=(10,6))
 
 T = 2
-mu = 0.1
+mu = 0.2
 sigma = 0.06
 B0 = 1
 dt = 0.01
