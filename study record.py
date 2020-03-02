@@ -3306,7 +3306,7 @@ def guess_charset(msg):
 
 #正态分布表
 from scipy.stats import norm
-norm.cdf(0.05)
+norm.cdf(-0.05)
 
           
 
