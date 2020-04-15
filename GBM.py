@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jun 27 23:56:53 2019
+Created on Thu Jun 27 18:56:53 2019
 
-@author: Minevei
+@author: Grefer
 """
 
 import matplotlib.pyplot as plt
