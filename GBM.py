@@ -13,7 +13,7 @@ fig = plt.figure(figsize=(10,6))
 
 T = 2
 mu = 0.2
-sigma = 0.05
+sigma = 0.1
 B0 = 1
 dt = 0.01
 step = round(T/dt)
