@@ -13,16 +13,20 @@ import matplotlib.pyplot as plt
 import datetime
 import arch
 
-data_SA = pd.read_csv(open(r"C:\Users\Admin\Desktop\OneDrive\Project B\Convertable Bond\南航行情序列.csv"))    #导入时间序列
+SA = pd.read_csv(open(r"C:\Users\Admin\Desktop\OneDrive\Project B\Convertable Bond\南航行情序列.csv"))    #导入时间序列
 
-data_SA.columns =['date','price']
-data_SA['date'] = pd.to_datetime(data_SA['date'])
-data_SA = data_SA.set_index('date')            #指定日期为索引值方便调用
+SA.columns =['date','price']
+SA['date'] = pd.to_datetime(SA['date'])
+SA = SA.set_index('date')            #指定日期为索引值方便调用
 
-for i in range(count(data_SA):
-    return np.ln(data)
-sample = data_SA['2019-10-14':'2020-06-14']    #指定样本集
-test = data_SA['2020-06-15':'2020-10-14']      #指定测试集
+SA['return'] = np.log(SA['price']/SA['price'].shift(1))
+
+SA[['price','return']].plot(subplots = True,style = 'b',figsize=(8,5))
+
+SA['Mov_Vol']=pd.rolling_std(SA['Return'],window = 252)*math.sqrt(252)
+
+sample = SA['2019-10-14':'2020-06-14']    #指定样本集
+test = SA['2020-06-15':'2020-10-14']      #指定测试集
 
 
 #GARCH模型建立
