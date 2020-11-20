@@ -23,10 +23,13 @@ SA['return'] = np.log(SA['price']/SA['price'].shift(1))
 
 SA[['price','return']].plot(subplots = True,style = 'b',figsize=(8,5))
 
-SA['Mov_Vol']=pd.rolling_std(SA['Return'],window = 252)*math.sqrt(252)
+
 
 sample = SA['2019-10-14':'2020-06-14']    #指定样本集
 test = SA['2020-06-15':'2020-10-14']      #指定测试集
+
+vol = np.sqrt(np.sum(np.square(SA['return']-np.average(SA['return']))) / sample.size)
+annualizedVol = vol * np.sqrt(252)
 
 
 #GARCH模型建立
