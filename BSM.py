@@ -15,12 +15,12 @@ def BSMCall(S,K,r,sigma,t):
 	d2=d1-sigma*np.sqrt(t)
 	return S*norm.cdf(d1)-K*np.exp(-r*t)*norm.cdf(d2)
 
-# 牛顿迭代法
+# 牛顿迭代法（实测使用%求余会导致牛顿迭代法逼近效率变差）
 
 def newton_call(P2,S,r,sigma,t,B):
-	K=6.24
-	while abs(BSMCall(S,K,r,sigma,t)*int(100/K)+B-P2)>0.0001:
-		if BSMCall(S,K,r,sigma,t)*int(100/K)+B>P2:
+	K=6.24 
+	while abs(BSMCall(S,K,r,sigma,t)*int(100/K)+float(format((100/K-int(100/K)),'.2f'))+B-P2)>0.0001:
+		if BSMCall(S,K,r,sigma,t)*int(100/K)+float(format((100/K-int(100/K)),'.2f'))+B>P2:
 			K+=0.0001
 		else:
 			K-=0.0001
@@ -28,4 +28,10 @@ def newton_call(P2,S,r,sigma,t,B):
 
 #   P2---回售价格   B---债券价值
 
-print('调整后转股价为:%.2f' %newton_call(100,4.37,0.0279,0.3,2,97.923))
+print('调整后转股价为:%.2f' %newton_call(104,4.37,0.029,0.4,2,97.923))
+
+
+
+
+
+ 
